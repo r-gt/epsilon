@@ -1,0 +1,100 @@
+#include <stdio.h>
+#include <math.h>
+#include "epsilon/engine.h"
+
+
+
+
+int main(int argc, char *argv){
+
+
+	setup_epsilon();
+
+	window win;
+
+	win.w=240*2; // window will be x2 bigger
+	win.h=300*2;
+	win.title="window 1";
+	create_window(&win);
+
+	set_window_scale(2);
+
+	float t=0;
+
+	int x = 0;
+	int y = 0;
+
+	texture tex;
+	create_texture(&tex);
+	load_texture("./texture.png");
+
+	audio * fart = set_sound("./dry-fart.wav", true);
+
+
+	set_mask(0,0,16,16);
+
+	while(running){
+
+
+
+		selected_window = &win;
+
+		set_render_color(0x0F0F2FAF);
+		clear_screen();
+
+		set_render_color(0xFFFFFFFF);
+		draw_line(0,0,10,10);
+
+		draw_line(0,0,10,250);
+
+		set_render_color(0x00FF00FF);
+		draw_line(mouse_x(), mouse_y(), (cos(t)*30.0)+x, (sin(t)*30.0)+y);
+
+		set_render_color(0xFFFFFFFF);
+		draw_rect((cos(t)*30.0)+x-15, (sin(t)*30.0)+y-15 ,30 ,30);
+		draw_point(15,15);
+
+		draw_texture(0,0);
+
+
+
+
+		render();
+
+
+
+		t+=0.1;
+
+		if(key_is_pressed("left")){
+			win.h++;
+
+			update_window(&win);
+		}
+
+
+
+		if(mouse_button_is_pressed("right")){
+			x = mouse_x();
+			y = mouse_y();
+		}
+
+		if(key_is_pressed("right")){
+			win.h--;
+
+			update_window(&win);
+		}
+
+
+
+		if(key_is_pressed("space")&& !audio_is_playing()){
+			audio_play();
+		}
+
+
+		end_frame();
+		render();
+
+		check_close_button();
+	}
+	return 0;
+}
