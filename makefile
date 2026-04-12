@@ -42,6 +42,7 @@ make:
 	$(GPP) main.c $(ARGS)
 
 test: make
-	$(OUT)
+	cd bin &&\
+	../$(OUT)
 
 

@@ -184,4 +184,6 @@ void clear_screen(){
 
 }
 
+#include "drawing_tiles.h"
+
 #endif

@@ -33,8 +33,9 @@ void create_window(window* win){
 	SDL_SetHint(SDL_SCALEMODE_NEAREST, "0");
 
 	win->window = SDL_CreateWindow(win->title, win->w, win->h, SDL_WINDOW_OPENGL);
-
 	win->renderer = SDL_CreateRenderer(win->window, NULL);
+
+	SDL_SetDefaultTextureScaleMode(win->renderer, SDL_SCALEMODE_NEAREST);
 
 	win->scale=1;
 
