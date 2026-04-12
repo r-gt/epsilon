@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "epsilon/engine.h"
 
-int main(){
+int main(int argc, char *argv){
 
 	setup_epsilon();
 	window win;
@@ -11,16 +11,11 @@ int main(){
 
 	create_window(&win);
 
-
-
-
-
-
 	while(running){
 
 
 		check_close_button();
 	}
 
-
+	return 0;
 }
