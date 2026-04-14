@@ -13,25 +13,8 @@ typedef struct {
 
 } texture;
 
+
 texture *selected_texture = NULL;
-
-
-
-void create_texture(texture * tex){
-
-	tex->x = 0;
-	tex->y = 0;
-	tex->scale[0] = 1; tex->scale[1] = 1;
-	tex->mask[0] = 0; tex->mask[1] = 0;
-	tex->angle = 0;
-	tex->origin_x = 0;
-	tex->origin_y = 0;
-	tex->loaded = false;
-
-	selected_texture = tex;
-
-	return;
-}
 
 
 
@@ -65,6 +48,29 @@ void load_texture(const char* path){
 
 	}
 
+}
+
+
+
+texture* create_texture(const char * path){
+
+	texture * tex;
+	tex=SDL_malloc(sizeof(*tex));
+
+	tex->x = 0;
+	tex->y = 0;
+	tex->scale[0] = 1; tex->scale[1] = 1;
+	tex->mask[0] = 0; tex->mask[1] = 0;
+	tex->angle = 0;
+	tex->origin_x = 0;
+	tex->origin_y = 0;
+	tex->loaded = false;
+
+	selected_texture = tex;
+
+	load_texture(path);
+
+	return tex;
 }
 
 
@@ -116,10 +122,20 @@ void draw_texture(int x, int y){
 
 
 
-void select_window(window * win){
+void destroy_texture(){
 
-	selected_window = win;
+	if (selected_texture == NULL) return;
+
+	SDL_DestroyTexture(selected_texture->texture_data);
+
+	free(selected_texture);
+
+	selected_texture = NULL; // we have no idea what texture was selected previously... unless...
+
 }
+
+
+
 
 
 

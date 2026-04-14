@@ -7,7 +7,7 @@
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_mixer/SDL_mixer.h>
 #include <SDL3_ttf/SDL_ttf.h>
-
+#include <stdlib.h>
 
 
 
@@ -63,14 +63,13 @@ void update_window(window* win){
 
 
 
+void select_window(window * win){
+
+	selected_window = win;
+}
+
 
 // if something has to be set up, here is the place to do it.
-
-
-SDL_AudioStream * audio_stream;
-SDL_AudioStreamCallback audio_callback;
-SDL_AudioSpec audio_spec;
-
 
 void setup_epsilon(){
 

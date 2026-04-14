@@ -7,7 +7,10 @@ typedef struct {
 tilemap * selected_tilemap = NULL;
 
 
-void create_tilemap(tilemap * tile, int t_x, int t_y, int t_w, int t_h, int grid_x, int grid_y){
+tilemap * create_tilemap(int t_x, int t_y, int t_w, int t_h, int grid_x, int grid_y){
+	tilemap * tile;
+	tile=SDL_malloc(sizeof(*tile));
+
 	tile->tile[0] = t_x;
 	tile->tile[1] = t_y;
 	tile->tile[2] = t_w;
@@ -17,7 +20,7 @@ void create_tilemap(tilemap * tile, int t_x, int t_y, int t_w, int t_h, int grid
 	tile->grid[1] = grid_y;
 
 	selected_tilemap = tile;
-
+	return tile;
 
 }
 

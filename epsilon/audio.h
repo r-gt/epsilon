@@ -11,7 +11,7 @@ audio * selected_audio = NULL;
 
 
 
-audio* set_sound(const char* path, bool predecode) {
+audio* create_audio(const char* path, bool predecode) {
 	audio* aud;
 
 	aud        = SDL_malloc(sizeof(audio));
@@ -30,6 +30,16 @@ audio* set_sound(const char* path, bool predecode) {
 	MIX_SetTrackAudio(aud->track, aud->data);
 	selected_audio = aud;
 	return aud;
+}
+
+
+void destroy_audio(){
+	MIX_DestroyAudio(selected_audio->data);
+	MIX_DestroyTrack(selected_audio->track);
+
+	free(selected_audio);
+
+	selected_audio=NULL;
 }
 
 

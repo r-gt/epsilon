@@ -8,6 +8,7 @@ bool running = true;
 bool key_is_pressed(const char *key) {
 	const bool *state = SDL_GetKeyboardState(NULL);
 	SDL_Scancode sc = SDL_GetScancodeFromName(key);
+
 	if (sc == SDL_SCANCODE_UNKNOWN) return false;
 	return state[sc];
 }
