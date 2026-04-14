@@ -73,6 +73,7 @@ Before making anything related to movement, we need to show something in the scr
 The result:
 
 ![drawing_a_red_square](./drawing_a_red_square.png)
+
 as we can see, a 50 pixels wide and 50 pixels tall square is being rendered on x=0 y=0.
 
 Q: Why is it on the top-left corner?
