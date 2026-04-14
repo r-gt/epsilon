@@ -3,6 +3,8 @@
 ###### AND VERY UNDOCUMENTED AT THE MOMENT  
 <br>
 
+[please check the wiki](documents/index.md)
+
 # QUICK START
 
 If you already have all requierements, try building it.
