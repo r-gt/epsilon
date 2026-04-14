@@ -52,7 +52,7 @@ Let's break down what everything here does:
 Before making anything related to movement, we need to show something in the screen, something that will represent our player.
 ~~~c
  
- int x=0; // our player's X position
+    int x=0; // our player's X position
 	int y=0; // our player's Y position
 
 	while(running){
@@ -76,7 +76,7 @@ The result:
 
 as we can see, a 50 pixels wide and 50 pixels tall square is being rendered on x=0 y=0.
 
-Q: Why is it on the top-left corner?
+Q: Why is it on the top-left corner?  
 A: Epsilon's origin (also known as the 0,0 point) is setted up on the top-left corner, and it's the default origin for rectangles and textures.
 
 
