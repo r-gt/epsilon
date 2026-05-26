@@ -9,6 +9,12 @@
 #include <SDL3_ttf/SDL_ttf.h>
 #include <stdlib.h>
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
+
+
 
 
 
@@ -17,6 +23,7 @@ typedef struct {
 	int h;
 	int scale;
 	char* title;
+	uint32_t multiply_color;
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 	MIX_Mixer *mixer;
@@ -32,12 +39,21 @@ window * selected_window = NULL;
 void create_window(window* win){
 	SDL_SetHint(SDL_SCALEMODE_NEAREST, "0");
 
-	win->window = SDL_CreateWindow(win->title, win->w, win->h, SDL_WINDOW_OPENGL);
+
+	#ifdef __EMSCRIPTEN__
+
+	win->window   = SDL_CreateWindow(win->title, win->w, win->h, 0);
 	win->renderer = SDL_CreateRenderer(win->window, NULL);
+	#else
+
+	win->window   = SDL_CreateWindow(win->title, win->w, win->h, SDL_WINDOW_OPENGL);
+	win->renderer = SDL_CreateRenderer(win->window, "opengl");
+	#endif
 
 	SDL_SetDefaultTextureScaleMode(win->renderer, SDL_SCALEMODE_NEAREST);
 
 	win->scale=1;
+	win->multiply_color = 0xFFFFFFFF;
 
 	selected_window = win;
 
@@ -87,3 +103,5 @@ void setup_epsilon(){
 #include "audio.h"
 
 #endif
+
+

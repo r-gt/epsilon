@@ -6,7 +6,7 @@ typedef struct {
 	SDL_Texture *texture_data;
 	int x, y;
 	int mask[4];
-	int scale[2];
+	float scale[2];
 	int angle;
 	int origin_x, origin_y;
 	bool loaded;
@@ -75,7 +75,7 @@ texture* create_texture(const char * path){
 
 
 
-void set_scale(int x, int y){
+void set_scale(float x, float y){
 	selected_texture->scale[0]=x;
 	selected_texture->scale[1]=y;
 }
@@ -182,7 +182,6 @@ void end_frame(){
 
 void set_render_color(uint32_t rgba){
 
-
 	SDL_SetRenderDrawColor(
 		selected_window->renderer,
 		0xFF & (rgba >> 24),
@@ -190,14 +189,31 @@ void set_render_color(uint32_t rgba){
 		0xFF & (rgba >> 8),
 		0xFF & rgba
 	);
+
 }
 
 
+void set_texture_color(uint32_t rgba) {
+
+
+	SDL_SetTextureColorMod(
+		selected_texture->texture_data,
+		0xFF & (rgba >> 24),
+		0xFF & (rgba >> 16),
+		0xFF & (rgba >> 8)
+	);
+
+	SDL_SetTextureAlphaMod(selected_texture->texture_data, 0xFF & rgba);
+}
+
 void clear_screen(){
 
-	SDL_RenderClear(selected_window->renderer);
-
-
+	SDL_FRect full = {
+		0, 0,
+		(float)selected_window->w,
+		(float)selected_window->h
+	};
+	SDL_RenderFillRect(selected_window->renderer, &full);
 }
 
 #include "drawing_tiles.h"

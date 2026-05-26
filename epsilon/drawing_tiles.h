@@ -37,6 +37,9 @@ void load_texture_tilemap(char * path){
 }
 
 
+
+
+
 void draw_tile(int x, int y, int selected) {
 
 	int total = selected_tilemap->grid[0] * selected_tilemap->grid[1];
@@ -52,12 +55,12 @@ void draw_tile(int x, int y, int selected) {
 		selected_tilemap->tile[3]											// tile height
 	};
 
-	// Destination rect: where to draw on screen
+	// Destination rect: where to draw on screen (scale-aware)
 	SDL_FRect dst = {
 		(float)x,
 		(float)y,
-		(float)selected_tilemap->tile[2],
-		(float)selected_tilemap->tile[3]
+		(float)selected_tilemap->tile[2] * selected_tilemap->source.scale[0],
+		(float)selected_tilemap->tile[3] * selected_tilemap->source.scale[1]
 	};
 
 	SDL_RenderTexture(selected_window->renderer, selected_tilemap->source.texture_data, &src, &dst);
@@ -65,3 +68,21 @@ void draw_tile(int x, int y, int selected) {
 
 
 
+
+void set_tilemap_color(uint32_t rgba) {
+
+
+	SDL_SetTextureColorMod(
+		selected_tilemap->source.texture_data,
+		0xFF & (rgba >> 24),
+		0xFF & (rgba >> 16),
+		0xFF & (rgba >> 8)
+	);
+
+	SDL_SetTextureAlphaMod(selected_tilemap->source.texture_data, 0xFF & rgba);
+}
+
+void set_tilemap_scale(float x, float y){
+	selected_tilemap->source.scale[0]=x;
+	selected_tilemap->source.scale[1]=y;
+}

@@ -1,11 +1,11 @@
 #ifndef EPSILON_EVENTS_H
 #define EPSILON_EVENTS_H
 
-bool running = true;
+_Bool running = true;
 
 
 
-bool key_is_pressed(const char *key) {
+_Bool key_is_pressed(const char *key) {
 	const bool *state = SDL_GetKeyboardState(NULL);
 	SDL_Scancode sc = SDL_GetScancodeFromName(key);
 
@@ -15,7 +15,7 @@ bool key_is_pressed(const char *key) {
 
 
 
-bool mouse_button_is_pressed(const char *button) {
+_Bool mouse_button_is_pressed(const char *button) {
 	SDL_MouseButtonFlags buttons = SDL_GetMouseState(NULL, NULL);
 
 	if (SDL_strcasecmp(button, "left")   == 0) return (buttons & SDL_BUTTON_LMASK)  != 0;
