@@ -107,7 +107,7 @@ void set_volume(float volume) {
 
 
 
-void destroy_audio() {
+void unload_audio() {
 	if (selected_audio->track) {
 		MIX_DestroyTrack(selected_audio->track);
 	}
