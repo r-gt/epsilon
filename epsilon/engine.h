@@ -92,6 +92,7 @@ void setup_epsilon(){
 
 	SDL_Init(SDL_INIT_GAMEPAD | SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS);
 	MIX_Init();
+	TTF_Init();
 
 
 }
@@ -99,6 +100,7 @@ void setup_epsilon(){
 
 
 #include "drawing.h"
+#include "font.h"
 #include "events.h"
 #include "audio.h"
 
