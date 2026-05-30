@@ -52,10 +52,10 @@ render();
 
 Epsilon relies on a selection system, let's see an example:
 ~~~c
-selected_texture = &player_texture;
+selected_texture = player_texture;
 draw_texture( 15,15 );                // draws the player texture at x=15, y=15
 
-selected_texture = &enemy_texture;
+selected_texture = enemy_texture;
 draw_texture( 50, 15 );               // draws the enemy texture at x=50, y=15
 ~~~
 "selected_texture" is actually a pointer, then you can decide what to do with the selected texture, either change it's parameters like scale or rotation, draw them, etc.
