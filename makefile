@@ -21,8 +21,8 @@ TARGET ?= $(HOST_OS)
 
 		ifeq ($(TARGET), Windows)
 			CC= x86_64-w64-mingw32-gcc -std=c17
-			OUT = ./$(BIN)/$(NAME)exe
-			ARGS= -o $(OUT) -lSDl3 -lSDL3_image -lSDL3_mixer -lSDL3_ttf -lmingw32 -I$(ENGINE)include -L$(ENGINE)lib
+			OUT = ./$(BIN)/$(NAME).exe
+			ARGS= -o $(OUT) -lSDL3 -lSDL3_image -lSDL3_mixer -lSDL3_ttf -lmingw32 -mwindows -I$(ENGINE)include -L$(ENGINE)lib
 
 		endif
 

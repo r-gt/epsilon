@@ -16,7 +16,8 @@ int main(int argc, char **argv){
 	while(running){
 		set_render_color(0x000000FF);
 		clear_screen();
-		
+
+
 		render();
 		end_frame();
 		check_close_button();

@@ -51,6 +51,8 @@ void create_window(window* win){
 	#endif
 
 	SDL_SetDefaultTextureScaleMode(win->renderer, SDL_SCALEMODE_NEAREST);
+	SDL_SetRenderDrawBlendMode(win->renderer, SDL_BLENDMODE_BLEND);
+
 
 	win->scale=1;
 	win->multiply_color = 0xFFFFFFFF;
