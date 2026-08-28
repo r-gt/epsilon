@@ -13,8 +13,9 @@
 #include <emscripten.h>
 #endif
 
-
-
+#ifndef REMOVE_EPSILON_EXTRAS
+#include "./extras/maploader.h"
+#endif
 
 
 
