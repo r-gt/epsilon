@@ -19,6 +19,11 @@
 
 
 
+
+
+
+
+
 typedef struct {
 	int w;
 	int h;
@@ -38,8 +43,6 @@ window * selected_window = NULL;
 
 
 void create_window(window* win){
-	SDL_SetHint(SDL_SCALEMODE_NEAREST, "0");
-
 
 	#ifdef __EMSCRIPTEN__
 
@@ -47,13 +50,9 @@ void create_window(window* win){
 	win->renderer = SDL_CreateRenderer(win->window, NULL);
 	#else
 
-	win->window   = SDL_CreateWindow(win->title, win->w, win->h, SDL_WINDOW_OPENGL);
+	win->window   = SDL_CreateWindow(win->title, win->w, win->h, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 	win->renderer = SDL_CreateRenderer(win->window, "opengl");
 	#endif
-
-	SDL_SetDefaultTextureScaleMode(win->renderer, SDL_SCALEMODE_NEAREST);
-	SDL_SetRenderDrawBlendMode(win->renderer, SDL_BLENDMODE_BLEND);
-
 
 	win->scale=1;
 	win->multiply_color = 0xFFFFFFFF;
@@ -78,6 +77,8 @@ void update_window(window* win){
 
 	SDL_SetWindowSize(win->window, win->w, win->h);
 	SDL_SetWindowTitle(win->window, win->title);
+
+	SDL_GetWindowSize(win->window, &win->w, &win->h);
 }
 
 
@@ -86,6 +87,15 @@ void select_window(window * win){
 
 	selected_window = win;
 }
+
+
+void toggle_fullscreen(){
+	if( SDL_GetWindowFlags(selected_window->window) & SDL_WINDOW_FULLSCREEN)
+		SDL_SetWindowFullscreen(selected_window->window, false);
+	else
+		SDL_SetWindowFullscreen(selected_window->window, true);
+}
+
 
 
 // if something has to be set up, here is the place to do it.
@@ -106,6 +116,20 @@ void setup_epsilon(){
 #include "font.h"
 #include "events.h"
 #include "audio.h"
+
+
+
+void end_frame(){
+
+	memcpy(previous_key_state, current_key_state, sizeof(current_key_state));
+	const _Bool *state = SDL_GetKeyboardState(NULL);
+	memcpy(current_key_state, state, SDL_SCANCODE_COUNT);
+
+	SDL_Delay(1000/60); //60 fps
+}
+
+
+
 
 #endif
 

@@ -4,14 +4,28 @@
 _Bool running = true;
 
 
+Uint8 previous_key_state[SDL_SCANCODE_COUNT];
+Uint8 current_key_state[SDL_SCANCODE_COUNT];
+
 
 _Bool key_is_pressed(const char *key) {
-	const bool *state = SDL_GetKeyboardState(NULL);
 	SDL_Scancode sc = SDL_GetScancodeFromName(key);
-
 	if (sc == SDL_SCANCODE_UNKNOWN) return false;
-	return state[sc];
+	return current_key_state[sc];
 }
+
+_Bool key_just_pressed(const char *key) {
+	SDL_Scancode sc = SDL_GetScancodeFromName(key);
+	if (sc == SDL_SCANCODE_UNKNOWN) return false;
+	return current_key_state[sc] && !previous_key_state[sc];
+}
+
+_Bool key_just_released(const char *key) {
+	SDL_Scancode sc = SDL_GetScancodeFromName(key);
+	if (sc == SDL_SCANCODE_UNKNOWN) return false;
+	return !current_key_state[sc] && previous_key_state[sc];
+}
+
 
 
 
@@ -49,8 +63,14 @@ void check_close_button(){
 
 	SDL_Event event;
 	while(SDL_PollEvent(&event)) {
+
 		if (event.type == SDL_EVENT_QUIT || event.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED) {
 			running = false;
+
+		}else if (event.type == SDL_EVENT_WINDOW_RESIZED) {
+			selected_window->w = event.window.data1;
+			selected_window->h = event.window.data2;
+
 		}
 	}
 

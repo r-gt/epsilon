@@ -169,13 +169,7 @@ void draw_point(int x, int y){
 
 
 void render(){
-		SDL_RenderPresent(selected_window->renderer);
-}
-
-
-
-void end_frame(){
-	SDL_Delay(1000/60);
+	SDL_RenderPresent(selected_window->renderer);
 }
 
 
@@ -185,9 +179,9 @@ void set_render_color(uint32_t rgba){
 	SDL_SetRenderDrawColor(
 		selected_window->renderer,
 		0xFF & (rgba >> 24),
-		0xFF & (rgba >> 16),
-		0xFF & (rgba >> 8),
-		0xFF & rgba
+						   0xFF & (rgba >> 16),
+						   0xFF & (rgba >> 8),
+						   0xFF & rgba
 	);
 
 }
@@ -199,8 +193,8 @@ void set_texture_color(uint32_t rgba) {
 	SDL_SetTextureColorMod(
 		selected_texture->texture_data,
 		0xFF & (rgba >> 24),
-		0xFF & (rgba >> 16),
-		0xFF & (rgba >> 8)
+						   0xFF & (rgba >> 16),
+						   0xFF & (rgba >> 8)
 	);
 
 	SDL_SetTextureAlphaMod(selected_texture->texture_data, 0xFF & rgba);
