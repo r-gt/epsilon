@@ -34,17 +34,19 @@ map * create_map(char* path){
 	if (file == NULL) {
 		perror("Error opening file\n");
 
+		output->data_size = 0;
 		output->data = 0;
 		output->rows = 0;
 		output->columns = 0;
 
+		return output;
 	}
 
 	// initial memory allocation, we don't like segfaults nor memory corruption here.
 
 	long fields=0;
 	char c=0;
-	int in_field=0;
+
 
 	while((c=fgetc(file)) != EOF){
 		if(c==CSV_SEPARATOR[0] || c=='\n') fields++;
@@ -108,6 +110,18 @@ map * create_map(char* path){
 
 	selected_map = output;
 
+	int expected_fields= sizeof(int)*output->columns*output->rows;
+
+	if( output->data_size != expected_fields){
+		printf("error reading map \"%s\" wrong size\n expected:  %d bytes\n got:       %d bytes\n", path, output->data_size, expected_fields);
+
+			// return dummy values:
+		output->data_size = 0;
+		output->data = 0;
+		output->rows = 0;
+		output->columns = 0;
+	}
+
 	return output;
 
 }
@@ -117,6 +131,7 @@ int get_tile_map(int x, int y){
 		return selected_map->data[y * selected_map->columns + x];
 	else
 		return 0;
+
 }
 
 

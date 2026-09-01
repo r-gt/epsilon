@@ -6,5 +6,5 @@
 - [font.h](font.md)
 
 ## EXTRAS
-- [drawing_tiles](drawing_tiles.md)
+- [drawing_tiles.h](drawing_tiles.md)
 - [maploader.h](maploader.md)

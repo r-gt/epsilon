@@ -34,7 +34,7 @@ update_window(&win);
 ```
 
 ## void toggle_fullscreen()
-sets `selected_window` into fullscreen mode (might not work with fixed size windows)
+sets `selected_window` into fullscreen or windowed mode (might not work with fixed size windows)
 
 **WARNING:** it will actually toggle between fullscreen and windowed, is strongly recommended to not run it every frame.
 
