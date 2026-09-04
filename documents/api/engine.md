@@ -2,7 +2,7 @@
 
 ## void create_window(window * win)
 
-creates a window, renderer, audio context, and everything needed to handle user inputs, displays, and sound.
+Creates a window, renderer, audio context, and everything needed to handle user inputs, displays, and sound.
 
 Usage:
 ```
@@ -16,7 +16,7 @@ create_window(&win);
 *(from now on, we will reffer any window as "win")*
 
 ## void update_window(window * win)
-updates all windows values to match the structure's values.
+Updates all windows values to match the structure's values.
 
 usage:
 ```
@@ -24,8 +24,8 @@ update_window(&win);
 ```
 
 
-## void set_window_scale()
-set `selected_window`'s scale factor, **NOTICE: it won't modify it's size in pixels, you might do that manually**
+## void set_window_scale(float scale)
+Set `selected_window`'s scale factor, **NOTICE: it won't modify it's size in pixels, you might do that manually**
 
 Usage:
 ```
@@ -34,12 +34,27 @@ update_window(&win);
 ```
 
 ## void toggle_fullscreen()
-sets `selected_window` into fullscreen or windowed mode (might not work with fixed size windows)
+Sets `selected_window` into fullscreen or windowed mode (might not work with fixed size windows)
 
-**WARNING:** it will actually toggle between fullscreen and windowed, is strongly recommended to not run it every frame.
+**WARNING:** It will actually toggle between fullscreen and windowed, is strongly recommended to not run it every frame.
 
 usage:
 ```
 selected_window  = &win // careful with this line, it's untested atm.
 toggle_fullscreen();
+```
+
+## void setup_epsilon()
+Sets up everything needed by the engine to work properly.
+
+Usage:
+```
+setup_epsilon();
+```
+## void end_frame()
+Does everything needed to process the next frame.
+
+Usage:
+```
+end_frame();
 ```
