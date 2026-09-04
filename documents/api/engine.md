@@ -5,7 +5,7 @@
 Creates a window, renderer, audio context, and everything needed to handle user inputs, displays, and sound.
 
 Usage:
-```
+```c
 window win;
 win.title="Epsilon";
 win.w=256;
@@ -19,7 +19,7 @@ create_window(&win);
 Updates all windows values to match the structure's values.
 
 usage:
-```
+```c
 update_window(&win);
 ```
 
@@ -28,7 +28,7 @@ update_window(&win);
 Set `selected_window`'s scale factor, **NOTICE: it won't modify it's size in pixels, you might do that manually**
 
 Usage:
-```
+```c
 set_window_scale(2); // now every pixel will be twice as big.
 update_window(&win);
 ```
@@ -39,7 +39,7 @@ Sets `selected_window` into fullscreen or windowed mode (might not work with fix
 **WARNING:** It will actually toggle between fullscreen and windowed, is strongly recommended to not run it every frame.
 
 usage:
-```
+```c
 selected_window  = &win // careful with this line, it's untested atm.
 toggle_fullscreen();
 ```
@@ -48,13 +48,13 @@ toggle_fullscreen();
 Sets up everything needed by the engine to work properly.
 
 Usage:
-```
+```c
 setup_epsilon();
 ```
 ## void end_frame()
 Does everything needed to process the next frame.
 
 Usage:
-```
+```c
 end_frame();
 ```
