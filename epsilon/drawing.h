@@ -161,7 +161,7 @@ void draw_rect(int x, int y, int w, int h){
 
 
 
-void draw_point(int x, int y){
+void draw_pixel(int x, int y){
 
 	SDL_RenderPoint(selected_window->renderer, x, y);
 }
