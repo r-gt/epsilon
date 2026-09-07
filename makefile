@@ -13,26 +13,24 @@ endif
 TARGET ?= $(HOST_OS)
 
 
-	ifeq ($(HOST_OS), Linux)
-		CC= gcc -std=c17
-		OUT = ./$(BIN)/$(NAME).out
-		MKDIR=mkdir -p
-		ARGS= -o $(OUT) -L${BIN} -Wl,-rpath,'$$ORIGIN' -I$(ENGINE)include -L$(ENGINE)lib ${BIN}/libSDL3.so.0 ${BIN}/libSDL3_image.so.0 ${BIN}/libSDL3_mixer.so.0 ${BIN}/libSDL3_ttf.so.0 -lm
+ifeq ($(HOST_OS), Linux)
+	CC= gcc -std=c17
+	OUT = ./$(BIN)/$(NAME).out
+	MKDIR=mkdir -p
+	ARGS= -o $(OUT) -L${BIN} -Wl,-rpath,'$$ORIGIN' -I$(ENGINE)include -L$(ENGINE)lib ${BIN}/libSDL3.so.0 ${BIN}/libSDL3_image.so.0 ${BIN}/libSDL3_mixer.so.0 ${BIN}/libSDL3_ttf.so.0 -lm
 
-		ifeq ($(TARGET), Windows)
-			CC= x86_64-w64-mingw32-gcc -std=c17
-			OUT = ./$(BIN)/$(NAME).exe
-			ARGS= -o $(OUT) -lSDL3 -lSDL3_image -lSDL3_mixer -lSDL3_ttf -lmingw32 -mwindows -I$(ENGINE)include -L$(ENGINE)lib
+endif
 
-		endif
+ifeq ($(TARGET), Windows)
+	CC= x86_64-w64-mingw32-gcc -std=c17
+	OUT = ./$(BIN)/$(NAME).exe
+	MKDIR=mkdir -p
+	ARGS= -o $(OUT) -lSDL3 -lSDL3_image -lSDL3_mixer -lSDL3_ttf -lmingw32 -mwindows -I$(ENGINE)include -L$(ENGINE)lib
 
-	endif
+endif
 
 ifeq ($(HOST_OS), Windows)
-	CC= gcc -std=c17
-	MKDIR = if not exist $(BIN) mkdir
-	OUT = ./$(BIN)/$(NAME).exe
-
+	CC=gcc -std=c17
 
 endif
 
