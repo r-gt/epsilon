@@ -168,8 +168,43 @@ void draw_pixel(int x, int y){
 
 
 
+void draw_polygon(int x1, int y1, int x2, int y2, int x3, int y3){
+
+	Uint8 r, g, b, a;
+	SDL_GetRenderDrawColor(selected_window->renderer, &r, &g, &b, &a);
+	SDL_FColor color = { r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f };
+
+
+	SDL_Vertex vert[3];
+	vert[0].position.x = x1;
+	vert[0].position.y = y1;
+	vert[1].position.x = x2;
+	vert[1].position.y = y2;
+	vert[2].position.x = x3;
+	vert[2].position.y = y3;
+
+	vert[0].color=color;
+	vert[1].color=color;
+	vert[2].color=color;
+
+	SDL_RenderGeometry(selected_window->renderer, NULL, vert, 3, NULL, 0);
+}
+
+
+
 void render(){
+	SDL_SetRenderTarget(selected_window->renderer, NULL);
+
+	SDL_FRect dst = {
+		0,0,
+		selected_window->w,
+		selected_window->h
+	};
+
+	SDL_RenderTexture(selected_window->renderer, selected_window->target, NULL, &dst); // nearest blit, fills window
 	SDL_RenderPresent(selected_window->renderer);
+
+	SDL_SetRenderTarget(selected_window->renderer, selected_window->target);
 }
 
 
@@ -179,9 +214,9 @@ void set_render_color(uint32_t rgba){
 	SDL_SetRenderDrawColor(
 		selected_window->renderer,
 		0xFF & (rgba >> 24),
-						   0xFF & (rgba >> 16),
-						   0xFF & (rgba >> 8),
-						   0xFF & rgba
+		0xFF & (rgba >> 16),
+		0xFF & (rgba >> 8),
+		0xFF & rgba
 	);
 
 }
@@ -193,8 +228,8 @@ void set_texture_color(uint32_t rgba) {
 	SDL_SetTextureColorMod(
 		selected_texture->texture_data,
 		0xFF & (rgba >> 24),
-						   0xFF & (rgba >> 16),
-						   0xFF & (rgba >> 8)
+		0xFF & (rgba >> 16),
+		0xFF & (rgba >> 8)
 	);
 
 	SDL_SetTextureAlphaMod(selected_texture->texture_data, 0xFF & rgba);

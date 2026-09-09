@@ -4,6 +4,9 @@
 _Bool running = true;
 
 
+Uint64 last_time;
+float delta_time;
+
 Uint8 previous_key_state[SDL_SCANCODE_COUNT];
 Uint8 current_key_state[SDL_SCANCODE_COUNT];
 
@@ -61,6 +64,12 @@ float mouse_y(void) {
 
 void check_close_button(){
 
+	Uint64 current_time = SDL_GetTicks();
+
+	delta_time = (float)(current_time - last_time) / 1000.0f;
+	last_time = current_time;
+
+
 	SDL_Event event;
 	while(SDL_PollEvent(&event)) {
 
@@ -68,8 +77,10 @@ void check_close_button(){
 			running = false;
 
 		}else if (event.type == SDL_EVENT_WINDOW_RESIZED) {
-			selected_window->w = event.window.data1;
-			selected_window->h = event.window.data2;
+			selected_window->w = event.window.data1 - (event.window.data1%selected_window->scale);
+			selected_window->h = event.window.data2 - (event.window.data2%selected_window->scale);
+
+			set_window_scale(selected_window->scale);
 
 		}
 	}

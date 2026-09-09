@@ -32,6 +32,7 @@ typedef struct {
 	uint32_t multiply_color;
 	SDL_Window *window;
 	SDL_Renderer *renderer;
+	SDL_Texture  *target;
 	MIX_Mixer *mixer;
 
 } window;
@@ -66,8 +67,18 @@ void create_window(window* win){
 
 
 void set_window_scale(float scale){
+
 	selected_window->scale = scale;
-	SDL_SetRenderScale(selected_window->renderer, scale, scale);
+
+	if (selected_window->target) SDL_DestroyTexture(selected_window->target);
+
+	selected_window->target = SDL_CreateTexture(selected_window->renderer, SDL_PIXELFORMAT_RGBA8888,
+												SDL_TEXTUREACCESS_TARGET,
+												selected_window->w / scale, selected_window->h / scale);
+
+	SDL_SetTextureScaleMode(selected_window->target, SDL_SCALEMODE_NEAREST);
+	SDL_SetRenderTarget(selected_window->renderer, selected_window->target);
+
 }
 
 
