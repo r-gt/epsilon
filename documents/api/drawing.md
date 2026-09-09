@@ -135,6 +135,17 @@ draw_rect(10,10, 20,30);      // red 20x30 rectangle at x:10 y:10
 ```
 
 
+## void draw_polygon(int x1, int y1, int x2, int y2, int x3, int y3)
+Draws a 3 vertex triangle, color's set by `set_render_color`, arguments express the position of all three points.
+
+Usage:
+```c
+set_render_color(0xFF0000FF);         // solid red
+draw_polygon(50,0, 100,100, 0,100);   // draws our triangle
+```
+
+
+
 ## void draw_pixel(int x, int y)
 Draws a single pixel at `x` and `y`.
 
