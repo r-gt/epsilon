@@ -77,8 +77,8 @@ void check_close_button(){
 			running = false;
 
 		}else if (event.type == SDL_EVENT_WINDOW_RESIZED) {
-			selected_window->w = event.window.data1 - (event.window.data1%selected_window->scale);
-			selected_window->h = event.window.data2 - (event.window.data2%selected_window->scale);
+			selected_window->w = event.window.data1 - (event.window.data1%selected_window->scale)+selected_window->scale;
+			selected_window->h = event.window.data2 - (event.window.data2%selected_window->scale)+selected_window->scale;
 
 			set_window_scale(selected_window->scale);
 
