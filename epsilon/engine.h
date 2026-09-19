@@ -15,6 +15,8 @@
 
 #ifndef REMOVE_EPSILON_EXTRAS
 #include "./extras/maploader.h"
+#include "./extras/goodies.h"
+#include "./extras/easelib.h"
 #endif
 
 
@@ -86,7 +88,10 @@ void set_window_scale(float scale){
 
 void update_window(window* win){
 
-	SDL_SetWindowSize(win->window, win->w, win->h);
+
+
+	set_window_scale(selected_window->scale);
+
 	SDL_SetWindowTitle(win->window, win->title);
 
 	SDL_GetWindowSize(win->window, &win->w, &win->h);
