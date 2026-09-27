@@ -1,35 +1,39 @@
-# EPSILON: BASIC SDL BASED FUNCTIONS!
-### ⚠️WARNING: STILL UNDER DEVELOPMENT!
-###### AND VERY UNDOCUMENTED AT THE MOMENT  
+# EPSILON: BASIC SDL BASED TOOLKIT!
+### WARNING: STILL UNDER DEVELOPMENT!
 <br>
 
 [please check the wiki](documents/index.md)
 
 # QUICK START
+<br>
 
-If you already have all requierements, try building it.
+## REQUIREMENTS
+
+### Epsilon only needs:
+**A working C compiler (GCC by default) and GNU make:**
+- **Windows:** [MinGW](https://www.mingw-w64.org/) distrubutions offers pre-compiled GCC and Make binaries.
+- **Linux:** Process might differ between distributions, generally, you just need to install  `gcc` and `make` from your package manager.
+
+**Optionally:**
+- **emsdk:** The [Emscripten SDK](https://emscripten.org/), only needed to compile Epsilon to a web based platform.
+- **gcc-mingw-w64:** This special distribution of MinGW native for Linux, only needed to cross-compile your project from Linux to Windows. 
 
 <br>
 
-### 1. CLONE THE REPOSITORY
-Download the .zip or .tar.gz file or do a simple `git clone`
+
+
+
+## 1. CLONE THE REPOSITORY
+Download the .zip or .tar.gz archives or do a simple `git clone`
 
 <br>
 
-### 2. INSTALL A COMPILER
 
-#### Windows:
-You need [MinGW](https://www.mingw-w64.org/) to build anything, specially GCC and Make.
 
-### linux:
-You need to download `GCC` and `Make` on your system.
+## 2. COMPILE
+###### (I think Make on windows command was "mingw-w64-make" or just "make")
 
-<br>
-
-### 3. COMPILE
-###### (i think Make on windows command was "mingw-w64-make")
-
-If everything was correctly installed, a simple Make command should result in a functional executable on the bin/ folder:
+If everything was correctly installed, a simple Make command should result in a functional executable on the `bin/` folder:
 ~~~
 make
 ~~~
@@ -38,24 +42,22 @@ If you want to quick test there's a command designed for that:
 ~~~
 make test
 ~~~
+<br>
 
 
-#### TARGETS
+
+### TARGETS
 Targets are meant to make cross-compiling simpler and faster, runing make without any target with default to your OS.
 
-
-you can compile to windows from linux by setting `TARGET=Windows` ,you need the g++-mingw-w64 compiler:
+To cross compile from Linux to Windows:
 ~~~
 make TARGET=Windows
 ~~~
 
 <br>
 
-you can also compile to web assembly, you need [Emscripten](https://emscripten.org/) on your system, specifically the **emsdk**:
+To compile for Web browsers:
 ~~~
 make TARGET=Web
 ~~~
-this will compile a web build into the bin-web folder (also creates that folder if it doesn't exist), remember that web assembly games requieres a host (local or not) to work.
-
-
-###### A refferences list will be added soon.
+This will compile a web build into the bin-web folder (automatically creates that folder if it doesn't exist).
