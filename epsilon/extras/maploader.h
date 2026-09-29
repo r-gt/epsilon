@@ -13,7 +13,7 @@ typedef struct {
 
 	int rows, columns;
 	int* data;
-	size_t data_size;
+	int data_size;
 } map;
 
 map *selected_map = NULL;
@@ -58,11 +58,6 @@ map * create_map(char* path){
 
 	output->data_size = sizeof(int)*fields;
 	output->data=malloc(sizeof(int)*fields);
-
-
-	size_t length = 0;
-	size_t read;
-
 	long index=0;
 
 
@@ -113,7 +108,7 @@ map * create_map(char* path){
 	int expected_fields= sizeof(int)*output->columns*output->rows;
 
 	if( output->data_size != expected_fields){
-		printf("error reading map \"%s\" wrong size\n expected:  %d bytes\n got:       %d bytes\n", path, output->data_size, expected_fields);
+		printf("error reading map \"%s\" wrong size\n expected:  %d bytes\n got: %d bytes\n", path, output->data_size, expected_fields);
 
 			// return dummy values:
 		output->data_size = 0;

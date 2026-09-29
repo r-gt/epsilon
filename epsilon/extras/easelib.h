@@ -16,6 +16,7 @@
 #define BACK     10
 #define BOUNCE   11
 
+
 // these are pre-baked math constants, compilers should do this automatically too, but i don't trust them
 #define c1 1.70158
 #define c3 2.70158
@@ -82,14 +83,17 @@ float ease(float t, int ease_in, int ease_out){
             if (t < 1 / d1) {
                 eased =  n1 * t * t;
             } else if (t < 2 / d1) {
-                eased =  n1 * (t -= 1.5 / d1) * t + 0.75;
+                t -= 1.5 / d1;
+                eased =  n1 * t * t + 0.75;
             } else if (t < 2.5 / d1) {
-                eased =  n1 * (t -= 2.25 / d1) * t + 0.9375;
+                t -= 2.25 / d1;
+                eased =  n1 * t * t + 0.9375;
             } else {
-                eased =  n1 * (t -= 2.625 / d1) * t + 0.984375;
+                t -= 2.25 / d1;
+                eased =  n1 * t * t + 0.984375;
             }
             eased = 1-eased;
-             break;
+            break;
     }
 
 

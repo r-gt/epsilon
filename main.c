@@ -1,7 +1,7 @@
 #include "epsilon/engine.h"
 
 
-int main(int argc, char **argv){
+int main(){
 	setup_epsilon();
 
 	window win;
