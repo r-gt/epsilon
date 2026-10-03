@@ -122,8 +122,16 @@ map * create_map(char* path){
 }
 
 int get_tile_map(int x, int y){
-	if (selected_map != NULL)
+	if (selected_map != NULL && x< selected_map->columns && y < selected_map->rows)
 		return selected_map->data[y * selected_map->columns + x];
+	else
+		return 0;
+
+}
+
+int set_tile_map(int value, int x, int y){
+		if (selected_map != NULL && x< selected_map->columns && y < selected_map->rows)
+		selected_map->data[y * selected_map->columns + x]=value;
 	else
 		return 0;
 
