@@ -135,13 +135,13 @@ void setup_epsilon(){
 
 
 
-void end_frame(){
+void end_frame(int frametime){
 
 	memcpy(previous_key_state, current_key_state, sizeof(current_key_state));
 	const _Bool *state = SDL_GetKeyboardState(NULL);
 	memcpy(current_key_state, state, SDL_SCANCODE_COUNT);
 
-	SDL_Delay(1000/60); //60 fps
+	SDL_Delay(framerate); //60 fps
 }
 
 

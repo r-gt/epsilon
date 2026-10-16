@@ -51,10 +51,11 @@ Usage:
 ```c
 setup_epsilon();
 ```
-## void end_frame()
+## void end_frame(int frametime)
 Does everything needed to process the next frame.
+You have to set how many milliseconds the game will wait until next frame.
 
 Usage:
 ```c
-end_frame();
+end_frame(1000/60); // 60 FPS
 ```

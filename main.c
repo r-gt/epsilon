@@ -19,7 +19,7 @@ int main(){
 
 
 		render();
-		end_frame();
+		end_frame(1000/60);
 		check_close_button();
 	}
 	return 0;

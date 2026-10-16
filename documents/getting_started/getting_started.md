@@ -28,7 +28,7 @@ int main(int argc, char *argv){
 		clear_screen();
 
 		render();
-		end_frame();
+		end_frame(1000/60);
 		check_close_button();
 	}
 
@@ -64,7 +64,7 @@ Before making anything related to movement, we need to show something in the scr
 		draw_rect(x,y,50,50); //draws a 50x50 pixels rectangle on "x" and "y" position 
 
 		render();
-		end_frame();
+		end_frame(1000/60);
 		check_close_button();
 	}
 
@@ -134,7 +134,7 @@ int main(int argc, char *argv){
 
 
 		render();
-		end_frame();
+		end_frame(1000/60);
 		check_close_button();
 	}
 
